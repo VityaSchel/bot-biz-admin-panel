@@ -1,10 +1,16 @@
+import React from 'react'
 import MUIAppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
+import Typography from '@mui/material/Typography'
+import Stack from '@mui/material/Stack'
+import Hamburger from 'hamburger-react'
+import UserMenu from './UserMenu'
 
-export default function AppBar() {
+export default function AppBar(props: {
+  isMenuOpen: boolean
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   return (
     <MUIAppBar position="fixed">
       <Toolbar>
@@ -15,43 +21,14 @@ export default function AppBar() {
           aria-label="menu"
           sx={{ mr: 2 }}
         >
-          <MenuIcon />
+          <Hamburger toggled={props.isMenuOpen} toggle={props.setMenuOpen} />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Photos
+          Админка
         </Typography>
-        {auth && (
-          <div>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-            </Menu>
-          </div>
-        )}
+        <Stack>
+          <UserMenu />
+        </Stack>
       </Toolbar>
     </MUIAppBar>
   )
