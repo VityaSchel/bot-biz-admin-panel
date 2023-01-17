@@ -1,11 +1,16 @@
 import './globals.css'
 import type { AppProps } from 'next/app'
 import ThemeWrapper from '/src/ssr/mui/ThemeWrapper'
+import { LocalizationProvider as MUILocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+import { ru } from 'date-fns/locale'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeWrapper>
-      <Component {...pageProps} />
+      <MUILocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ru}>
+        <Component {...pageProps} />
+      </MUILocalizationProvider>
     </ThemeWrapper>
   )
 }
