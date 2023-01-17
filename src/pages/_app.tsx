@@ -5,8 +5,9 @@ import { LocalizationProvider as MUILocalizationProvider } from '@mui/x-date-pic
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { ru } from 'date-fns/locale'
 import ApolloClient from '/src/api/ApolloClient'
+import { appWithTranslation } from 'next-i18next'
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeWrapper>
       <MUILocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ru}>
@@ -17,3 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
     </ThemeWrapper>
   )
 }
+
+
+export default appWithTranslation(App)

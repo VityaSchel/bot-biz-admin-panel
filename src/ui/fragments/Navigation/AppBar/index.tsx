@@ -6,11 +6,14 @@ import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
 import Hamburger from 'hamburger-react'
 import UserMenu from './UserMenu'
+import { useTranslation } from 'next-i18next'
 
 export default function AppBar(props: {
   isMenuOpen: boolean
   setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+  const { t } = useTranslation('common')
+
   return (
     <MUIAppBar position="fixed">
       <Toolbar>
@@ -28,7 +31,7 @@ export default function AppBar(props: {
           />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Админка
+          {t('title')}
         </Typography>
         <Stack>
           <UserMenu />

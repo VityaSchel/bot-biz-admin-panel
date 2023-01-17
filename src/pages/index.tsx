@@ -1,5 +1,6 @@
 import styles from './page.module.css'
 import Navigation from '/src/ui/fragments/Navigation'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export default function Home() {
   return (
@@ -7,4 +8,12 @@ export default function Home() {
       <Navigation />
     </main>
   )
+}
+
+export async function getStaticProps(context: { locale: string }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(context.locale, ['common', 'home']))
+    }
+  }
 }
