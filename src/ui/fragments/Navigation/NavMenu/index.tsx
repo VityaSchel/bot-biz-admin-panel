@@ -8,7 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
 import MDIIcon from '@mdi/react'
-import { mdiBullhorn, mdiLink, mdiAccount, mdiAccountGroup, mdiSendCircle, mdiNotebookEdit, mdiBookEdit, mdiTag } from '@mdi/js'
+import { mdiBullhorn, mdiLink, mdiAccountGroup, mdiNotebookEdit, mdiBookEdit } from '@mdi/js'
 import Link from 'next/link'
 
 export default function NavMenu() {
