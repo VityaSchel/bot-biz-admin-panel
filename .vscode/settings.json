@@ -1,0 +1,9 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.tabCompletion": "on",
+  "path-intellisense.mappings": {
+    "/*": "${workspaceFolder}/*"
+  },
+  "svg.preview.background": "black"
+}
