@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles.module.scss'
 import MUIAppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import IconButton from '@mui/material/IconButton'
@@ -19,9 +20,13 @@ export default function AppBar(props: {
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          sx={{ mr: 2, p: 0 }}
         >
-          <Hamburger toggled={props.isMenuOpen} toggle={props.setMenuOpen} />
+          <Hamburger 
+            toggled={props.isMenuOpen} 
+            toggle={props.setMenuOpen} 
+            size={20}
+          />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Админка
