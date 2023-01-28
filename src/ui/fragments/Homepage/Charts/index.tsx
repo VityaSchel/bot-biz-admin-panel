@@ -12,11 +12,11 @@ const mockData: ChartsData = [
       },
       {
         id: 'tg',
-        amt: 130501
+        amt: 137128
       },
       {
         id: 'lovebot',
-        amt: 130501
+        amt: 138057
       },
     ]
   },
@@ -25,15 +25,15 @@ const mockData: ChartsData = [
     sources: [
       {
         id: 'vk',
-        amt: 130501
+        amt: 125622
       },
       {
         id: 'tg',
-        amt: 130501
+        amt: 138092
       },
       {
         id: 'lovebot',
-        amt: 130501
+        amt: 121952
       },
     ]
   },
@@ -42,15 +42,15 @@ const mockData: ChartsData = [
     sources: [
       {
         id: 'vk',
-        amt: 130501
+        amt: 127102
       },
       {
         id: 'tg',
-        amt: 130501
+        amt: 132154
       },
       {
         id: 'lovebot',
-        amt: 130501
+        amt: 126875
       },
     ]
   },
@@ -59,15 +59,15 @@ const mockData: ChartsData = [
     sources: [
       {
         id: 'vk',
-        amt: 130501
+        amt: 134294
       },
       {
         id: 'tg',
-        amt: 130501
+        amt: 134908
       },
       {
         id: 'lovebot',
-        amt: 130501
+        amt: 125893
       },
     ]
   },
@@ -80,7 +80,7 @@ const mockData: ChartsData = [
       },
       {
         id: 'tg',
-        amt: 130501
+        amt: 127461
       },
       {
         id: 'lovebot',
@@ -93,7 +93,7 @@ const mockData: ChartsData = [
     sources: [
       {
         id: 'vk',
-        amt: 130501
+        amt: 129182
       },
       {
         id: 'tg',
@@ -101,7 +101,7 @@ const mockData: ChartsData = [
       },
       {
         id: 'lovebot',
-        amt: 130501
+        amt: 126717
       },
     ]
   },
@@ -110,15 +110,15 @@ const mockData: ChartsData = [
     sources: [
       {
         id: 'vk',
-        amt: 130501
+        amt: 116778
       },
       {
         id: 'tg',
-        amt: 130501
+        amt: 140501
       },
       {
         id: 'lovebot',
-        amt: 130501
+        amt: 150001
       },
     ]
   },
