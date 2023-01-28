@@ -1,3 +1,4 @@
 export default [
-  'common'
+  'common',
+  'pages_titles'
 ]

@@ -13,7 +13,7 @@ export default function Home() {
 export async function getStaticProps(context: { locale: string }) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ['common', 'home']))
+      ...(await serverSideTranslations(context.locale, ['common', 'pages_titles']))
     }
   }
 }

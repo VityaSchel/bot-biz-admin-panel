@@ -10,8 +10,11 @@ import ListSubheader from '@mui/material/ListSubheader'
 import MDIIcon from '@mdi/react'
 import { mdiBullhorn, mdiLink, mdiAccountGroup, mdiNotebookEdit, mdiBookEdit } from '@mdi/js'
 import Link from 'next/link'
+import { useTranslation } from 'next-i18next'
 
 export default function NavMenu() {
+  const { t } = useTranslation('pages_titles')
+
   return (
     <Box
       className={styles.list}
@@ -19,7 +22,7 @@ export default function NavMenu() {
     >
       <List>
         <ListSubheader component='div'>
-          subhead
+          {t('financial_statistics.subheader')}
         </ListSubheader>
         <ListItem disablePadding>
           <Link href='/path' className={styles.link}>
@@ -27,7 +30,7 @@ export default function NavMenu() {
               <ListItemIcon>
                 <MDIIcon path={mdiNotebookEdit} size={1} />
               </ListItemIcon>
-              <ListItemText primary='text' />
+              <ListItemText primary={t('financial_statistics.transactions')} />
             </ListItemButton>
           </Link>
         </ListItem>
@@ -37,7 +40,17 @@ export default function NavMenu() {
               <ListItemIcon>
                 <MDIIcon path={mdiNotebookEdit} size={1} />
               </ListItemIcon>
-              <ListItemText primary='text' />
+              <ListItemText primary={t('financial_statistics.subscriptions')} />
+            </ListItemButton>
+          </Link>
+        </ListItem>
+        <ListItem disablePadding>
+          <Link href='/path' className={styles.link}>
+            <ListItemButton>
+              <ListItemIcon>
+                <MDIIcon path={mdiNotebookEdit} size={1} />
+              </ListItemIcon>
+              <ListItemText primary={t('financial_statistics.checks_settings')} />
             </ListItemButton>
           </Link>
         </ListItem>
@@ -45,7 +58,7 @@ export default function NavMenu() {
       <Divider />
       <List>
         <ListSubheader component='div'>
-          subhead 2
+          {t('users.subheader')}
         </ListSubheader>
         <ListItem disablePadding>
           <Link href='/path2' className={styles.link}>
@@ -53,7 +66,7 @@ export default function NavMenu() {
               <ListItemIcon>
                 <MDIIcon path={mdiBookEdit} size={1} />
               </ListItemIcon>
-              <ListItemText primary='text2' />
+              <ListItemText primary={t('users.service')} />
             </ListItemButton>
           </Link>
         </ListItem>
@@ -63,7 +76,7 @@ export default function NavMenu() {
               <ListItemIcon>
                 <MDIIcon path={mdiBookEdit} size={1} />
               </ListItemIcon>
-              <ListItemText primary='text2' />
+              <ListItemText primary={t('users.sources')} />
             </ListItemButton>
           </Link>
         </ListItem>
@@ -71,7 +84,7 @@ export default function NavMenu() {
       <Divider />
       <List>
         <ListSubheader component='div'>
-          subhead 3
+          {t('sources.subheader')}
         </ListSubheader>
         <ListItem disablePadding>
           <Link href='/path3' className={styles.link}>
@@ -79,7 +92,7 @@ export default function NavMenu() {
               <ListItemIcon>
                 <MDIIcon path={mdiBullhorn} size={1} />
               </ListItemIcon>
-              <ListItemText primary='Text' />
+              <ListItemText primary={t('sources.bots')} />
             </ListItemButton>
           </Link>
         </ListItem>
@@ -89,23 +102,30 @@ export default function NavMenu() {
               <ListItemIcon>
                 <MDIIcon path={mdiLink} size={1} />
               </ListItemIcon>
-              <ListItemText primary='Text' />
+              <ListItemText primary={t('sources.sites')} />
             </ListItemButton>
           </Link>
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListSubheader component='div'>
-          Subhead4
-        </ListSubheader>
         <ListItem disablePadding>
           <Link href='/path4' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiAccountGroup} size={1} />
               </ListItemIcon>
-              <ListItemText primary='Text4' />
+              <ListItemText primary={t('payouts')} />
+            </ListItemButton>
+          </Link>
+        </ListItem>
+        <ListItem disablePadding>
+          <Link href='/path4' className={styles.link}>
+            <ListItemButton>
+              <ListItemIcon>
+                <MDIIcon path={mdiAccountGroup} size={1} />
+              </ListItemIcon>
+              <ListItemText primary={t('ads')} />
             </ListItemButton>
           </Link>
         </ListItem>

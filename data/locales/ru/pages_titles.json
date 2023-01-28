@@ -1,0 +1,20 @@
+{
+  "financial_statistics": {
+    "subheader": "Финансовая статистика",
+    "transactions": "Транзакции",
+    "subscriptions": "Подписки",
+    "checks_settings": "Настройка касс"
+  },
+  "users": {
+    "subheader": "Пользователи",
+    "service": "Юзеры сервиса",
+    "sources": "Юзеры источников"
+  },
+  "sources": {
+    "subheader": "Источники",
+    "bots": "Боты",
+    "sites": "Сайты"
+  },
+  "payouts": "Выплаты",
+  "ads": "Рассылки"
+}

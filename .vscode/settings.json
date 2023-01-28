@@ -5,5 +5,8 @@
   "path-intellisense.mappings": {
     "/*": "${workspaceFolder}/*"
   },
-  "svg.preview.background": "black"
+  "svg.preview.background": "black",
+  "i18n-ally.localesPaths": [
+    "data/locales"
+  ]
 }
