@@ -146,14 +146,6 @@ const formatDataForChart = (input: ChartsData) => {
 
 export default function HomepageCharts() {
   const [data, setData] = React.useState(formatDataForChart(mockData))
-
-  const formatDataForTooltip = (chartData: typeof data) => {
-    return chartData.map(day => ({
-      name: day.name,
-      value: 'sobaka',
-      unit: '₽'
-    }))
-  }
   
   const sources = [
     {
@@ -187,7 +179,9 @@ export default function HomepageCharts() {
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip 
-          formatter={formatDataForTooltip}
+          formatter={(value: number) => {
+            return value.toLocaleString('ru-RU') + ' ₽'
+          }}
         />
         <Legend />
         {sources.map((source, i) => (
