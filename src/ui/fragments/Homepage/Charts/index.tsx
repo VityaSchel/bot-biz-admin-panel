@@ -1,6 +1,110 @@
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React from 'react'
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import seedColor from 'seed-color'
 
-const mockData = [
+const mockData: ChartsData = [
+  {
+    date: new Date('2023-01-22'),
+    sources: [
+      {
+        id: 'vk',
+        amt: 130501
+      },
+      {
+        id: 'tg',
+        amt: 130501
+      },
+      {
+        id: 'lovebot',
+        amt: 130501
+      },
+    ]
+  },
+  {
+    date: new Date('2023-01-23'),
+    sources: [
+      {
+        id: 'vk',
+        amt: 130501
+      },
+      {
+        id: 'tg',
+        amt: 130501
+      },
+      {
+        id: 'lovebot',
+        amt: 130501
+      },
+    ]
+  },
+  {
+    date: new Date('2023-01-24'),
+    sources: [
+      {
+        id: 'vk',
+        amt: 130501
+      },
+      {
+        id: 'tg',
+        amt: 130501
+      },
+      {
+        id: 'lovebot',
+        amt: 130501
+      },
+    ]
+  },
+  {
+    date: new Date('2023-01-25'),
+    sources: [
+      {
+        id: 'vk',
+        amt: 130501
+      },
+      {
+        id: 'tg',
+        amt: 130501
+      },
+      {
+        id: 'lovebot',
+        amt: 130501
+      },
+    ]
+  },
+  {
+    date: new Date('2023-01-26'),
+    sources: [
+      {
+        id: 'vk',
+        amt: 130501
+      },
+      {
+        id: 'tg',
+        amt: 130501
+      },
+      {
+        id: 'lovebot',
+        amt: 130501
+      },
+    ]
+  },
+  {
+    date: new Date('2023-01-27'),
+    sources: [
+      {
+        id: 'vk',
+        amt: 130501
+      },
+      {
+        id: 'tg',
+        amt: 130501
+      },
+      {
+        id: 'lovebot',
+        amt: 130501
+      },
+    ]
+  },
   {
     date: new Date('2023-01-28'),
     sources: [
@@ -17,13 +121,15 @@ const mockData = [
         amt: 130501
       },
     ]
-  }
+  },
 ]
+
+type ChartsData = { date: Date, sources: { id: string, amt: number }[] }[]
 
 export default function HomepageCharts() {
   const [data, setData] = React.useState(mockData)
 
-  const formatData = (input: { date: Date, sources: { id: string, amt: number }[] }[]) => {
+  const formatData = (input: ChartsData) => {
     return input.map(day => ({
       name: Intl.DateTimeFormat('ru-RU', {
         day: '2-digit',
@@ -73,7 +179,13 @@ export default function HomepageCharts() {
         <Tooltip />
         <Legend />
         {sources.map((source, i) => (
-          <Bar dataKey={`source_${source.id}`} stackId='a' fill="#8884d8" key={i} />
+          <Bar 
+            key={`source_${source.id}`}
+            dataKey={`source_${source.id}`}
+            name={source.name}
+            stackId='a' 
+            fill={seedColor(source.id).toHex()}
+          />
         ))}
       </BarChart>
     </ResponsiveContainer>
