@@ -130,19 +130,21 @@ export default function HomepageCharts() {
   const [data, setData] = React.useState(mockData)
 
   const formatData = (input: ChartsData) => {
-    return input.map(day => ({
-      name: Intl.DateTimeFormat('ru-RU', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-      }).format(day.date),
-      ...Object.fromEntries(
-        day.sources.map(source => [
-          `source_${source.id}`,
-          source.amt
-        ])
-      )
-    }))
+    return input.map(day => {
+      const chartDay: { name: string, [key: `source_${string}`]: number } = {
+        name: Intl.DateTimeFormat('ru-RU', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        }).format(day.date)
+      }
+
+      for (const source of day.sources) {
+        chartDay[`source_${source.id}`] = source.amt
+      }
+
+      return chartDay
+    })
   }
   
   const sources = [
