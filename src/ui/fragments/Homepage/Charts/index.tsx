@@ -126,25 +126,33 @@ const mockData: ChartsData = [
 
 type ChartsData = { date: Date, sources: { id: string, amt: number }[] }[]
 
+const formatDataForChart = (input: ChartsData) => {
+  return input.map(day => {
+    const chartDay: { name: string, [key: `source_${string}`]: number } = {
+      name: Intl.DateTimeFormat('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }).format(day.date)
+    }
+
+    for (const source of day.sources) {
+      chartDay[`source_${source.id}`] = source.amt
+    }
+
+    return chartDay
+  })
+}
+
 export default function HomepageCharts() {
-  const [data, setData] = React.useState(mockData)
+  const [data, setData] = React.useState(formatDataForChart(mockData))
 
-  const formatData = (input: ChartsData) => {
-    return input.map(day => {
-      const chartDay: { name: string, [key: `source_${string}`]: number } = {
-        name: Intl.DateTimeFormat('ru-RU', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric'
-        }).format(day.date)
-      }
-
-      for (const source of day.sources) {
-        chartDay[`source_${source.id}`] = source.amt
-      }
-
-      return chartDay
-    })
+  const formatDataForTooltip = (chartData: typeof data) => {
+    return chartData.map(day => ({
+      name: day.name,
+      value: 'sobaka',
+      unit: '₽'
+    }))
   }
   
   const sources = [
@@ -167,7 +175,7 @@ export default function HomepageCharts() {
       <BarChart
         width={500}
         height={300}
-        data={formatData(data)}
+        data={data}
         margin={{
           top: 20,
           right: 30,
@@ -178,7 +186,9 @@ export default function HomepageCharts() {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
-        <Tooltip />
+        <Tooltip 
+          formatter={formatDataForTooltip}
+        />
         <Legend />
         {sources.map((source, i) => (
           <Bar 
