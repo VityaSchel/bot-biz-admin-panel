@@ -8,9 +8,19 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import ListSubheader from '@mui/material/ListSubheader'
 import MDIIcon from '@mdi/react'
-import { mdiBullhorn, mdiLink, mdiAccountGroup, mdiNotebookEdit, mdiBookEdit } from '@mdi/js'
 import Link from 'next/link'
 import { useTranslation } from 'next-i18next'
+import { 
+  mdiCurrencyUsd, 
+  mdiCreditCardRefreshOutline, 
+  mdiApplicationCogOutline,
+  mdiAccountNetwork,
+  mdiAccountMultiple,
+  mdiRobot,
+  mdiWeb,
+  mdiCashSync,
+  mdiMessageText
+} from '@mdi/js'
 
 export default function NavMenu() {
   const { t } = useTranslation('pages_titles')
@@ -28,7 +38,7 @@ export default function NavMenu() {
           <Link href='/path' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiNotebookEdit} size={1} />
+                <MDIIcon path={mdiCurrencyUsd} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('financial_statistics.transactions')} />
             </ListItemButton>
@@ -38,7 +48,7 @@ export default function NavMenu() {
           <Link href='/path' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiNotebookEdit} size={1} />
+                <MDIIcon path={mdiCreditCardRefreshOutline} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('financial_statistics.subscriptions')} />
             </ListItemButton>
@@ -48,7 +58,7 @@ export default function NavMenu() {
           <Link href='/path' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiNotebookEdit} size={1} />
+                <MDIIcon path={mdiApplicationCogOutline} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('financial_statistics.checks_settings')} />
             </ListItemButton>
@@ -64,7 +74,7 @@ export default function NavMenu() {
           <Link href='/path2' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiBookEdit} size={1} />
+                <MDIIcon path={mdiAccountNetwork} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('users.service')} />
             </ListItemButton>
@@ -74,7 +84,7 @@ export default function NavMenu() {
           <Link href='/path2' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiBookEdit} size={1} />
+                <MDIIcon path={mdiAccountMultiple} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('users.sources')} />
             </ListItemButton>
@@ -90,7 +100,7 @@ export default function NavMenu() {
           <Link href='/path3' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiBullhorn} size={1} />
+                <MDIIcon path={mdiRobot} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('sources.bots')} />
             </ListItemButton>
@@ -100,7 +110,7 @@ export default function NavMenu() {
           <Link href='/path3' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiLink} size={1} />
+                <MDIIcon path={mdiWeb} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('sources.sites')} />
             </ListItemButton>
@@ -113,7 +123,7 @@ export default function NavMenu() {
           <Link href='/path4' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiAccountGroup} size={1} />
+                <MDIIcon path={mdiCashSync} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('payouts')} />
             </ListItemButton>
@@ -123,7 +133,7 @@ export default function NavMenu() {
           <Link href='/path4' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
-                <MDIIcon path={mdiAccountGroup} size={1} />
+                <MDIIcon path={mdiMessageText} size={1} />
               </ListItemIcon>
               <ListItemText primary={t('ads')} />
             </ListItemButton>
