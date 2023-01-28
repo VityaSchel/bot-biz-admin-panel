@@ -1,6 +1,7 @@
 import styles from './page.module.css'
 import Navigation from '/src/ui/fragments/Navigation'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import HomepageCharts from '../ui/fragments/Homepage/Charts'
 
 export default function Home() {
   return (
