@@ -35,7 +35,7 @@ export default function NavMenu() {
           {t('financial_statistics.subheader')}
         </ListSubheader>
         <ListItem disablePadding>
-          <Link href='/path' className={styles.link}>
+          <Link href='/statistics/transactions' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiCurrencyUsd} size={1} />
@@ -45,7 +45,7 @@ export default function NavMenu() {
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link href='/path' className={styles.link}>
+          <Link href='/statistics/subscriptions' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiCreditCardRefreshOutline} size={1} />
@@ -55,7 +55,8 @@ export default function NavMenu() {
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link href='/path' className={styles.link}>
+          {/** TODO: replace "statistics" with smthg more general? */}
+          <Link href='/statistics/checkouts' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiApplicationCogOutline} size={1} />
@@ -71,7 +72,7 @@ export default function NavMenu() {
           {t('users.subheader')}
         </ListSubheader>
         <ListItem disablePadding>
-          <Link href='/path2' className={styles.link}>
+          <Link href='/services-users' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiAccountNetwork} size={1} />
@@ -81,7 +82,7 @@ export default function NavMenu() {
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link href='/path2' className={styles.link}>
+          <Link href='/sources/users' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiAccountMultiple} size={1} />
@@ -97,7 +98,7 @@ export default function NavMenu() {
           {t('sources.subheader')}
         </ListSubheader>
         <ListItem disablePadding>
-          <Link href='/path3' className={styles.link}>
+          <Link href='/sources/bots' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiRobot} size={1} />
@@ -107,7 +108,7 @@ export default function NavMenu() {
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link href='/path3' className={styles.link}>
+          <Link href='/sources/sites' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiWeb} size={1} />
@@ -120,7 +121,7 @@ export default function NavMenu() {
       <Divider />
       <List>
         <ListItem disablePadding>
-          <Link href='/path4' className={styles.link}>
+          <Link href='/payouts' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiCashSync} size={1} />
@@ -130,7 +131,7 @@ export default function NavMenu() {
           </Link>
         </ListItem>
         <ListItem disablePadding>
-          <Link href='/path4' className={styles.link}>
+          <Link href='/ads' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiMessageText} size={1} />
