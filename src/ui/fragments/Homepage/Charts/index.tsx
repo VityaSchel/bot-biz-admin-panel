@@ -132,7 +132,7 @@ const formatDataForChart = (input: ChartsData) => {
       name: Intl.DateTimeFormat('ru-RU', {
         day: '2-digit',
         month: '2-digit',
-        year: 'numeric'
+        // year: 'numeric'
       }).format(day.date)
     }
 
@@ -163,10 +163,8 @@ export default function HomepageCharts() {
   ]
 
   return (
-    <ResponsiveContainer width={500} height={500}>
+    <ResponsiveContainer width={600} height={500}>
       <BarChart
-        width={500}
-        height={300}
         data={data}
         margin={{
           top: 20,
@@ -176,12 +174,16 @@ export default function HomepageCharts() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis 
+          interval={0}
+          dataKey='name'
+        />
+        <YAxis 
+          width={100}
+          tickFormatter={(value: number) => value.toLocaleString('ru-RU') + ' ₽'} 
+        />
         <Tooltip 
-          formatter={(value: number) => {
-            return value.toLocaleString('ru-RU') + ' ₽'
-          }}
+          formatter={(value: number) => value.toLocaleString('ru-RU') + ' ₽'}
         />
         <Legend />
         {sources.map((source, i) => (
