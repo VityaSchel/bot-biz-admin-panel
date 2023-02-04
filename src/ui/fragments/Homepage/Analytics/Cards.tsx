@@ -134,7 +134,7 @@ export function Revenue() {
   const [revenueDates, setRevenueDates] = React.useState<RevenueChartsData>(mockData)
 
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275, flex: 1 }}>
       <CardContent>
         <Typography variant='h5' color="text.primary" gutterBottom>
           Доход сервиса
@@ -147,6 +147,32 @@ export function Revenue() {
           Денежные средства, которые мы выручили
         </Typography>
         <RevenueChart data={revenueDates} />
+      </CardContent>
+      <CardActions>
+        <Button size="small">Подробнее</Button>
+      </CardActions>
+    </Card>
+  )
+}
+
+export function Turnover() {
+  const [turnover, setTurnover] = React.useState<string>('2,971,505 ₽')
+  const [turnoverDates, setTurnoverDates] = React.useState<RevenueChartsData>(mockData)
+
+  return (
+    <Card sx={{ minWidth: 275, flex: 1 }}>
+      <CardContent>
+        <Typography variant='h5' color="text.primary" gutterBottom>
+          Оборот сервиса
+        </Typography>
+
+        <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
+          {turnover}
+        </Typography>
+        <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
+          Денежные средства, которые у нас есть, вместе с hold-транзакциями
+        </Typography>
+        <RevenueChart data={turnoverDates} />
       </CardContent>
       <CardActions>
         <Button size="small">Подробнее</Button>

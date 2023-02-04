@@ -1,13 +1,14 @@
 import Stack from '@mui/material/Stack'
-import { Revenue } from '/src/ui/fragments/Homepage/Analytics/Cards'
+import { Revenue, Turnover } from './Cards'
 
 export default function Analytics() {
   return (
     <Stack spacing={2} sx={{ padding: 5 }}>
-      <Stack spacing={2}>
+      <Stack spacing={2} direction='row'>
         <Revenue />
+        <Turnover />
       </Stack>
-      <Stack spacing={2}>
+      <Stack spacing={2} direction='row'>
       
       </Stack>
     </Stack>
