@@ -4,6 +4,10 @@ import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import CardActions from '@mui/material/CardActions'
+import Tooltip from '@mui/material/Tooltip'
+import IconButton from '@mui/material/IconButton'
+import MDIIcon from '@mdi/react'
+import { mdiHelpCircleOutline } from '@mdi/js'
 
 import RevenueChart from '../Charts/RevenueChart'
 import type { ChartsData as RevenueChartsData } from '../Charts/RevenueChart'
@@ -11,6 +15,8 @@ import HoldTransactionsChart from '../Charts/HoldTransactions'
 import type { ChartsData as HoldTransactionsChartsData } from '../Charts/HoldTransactions'
 import HoldMoneyChart from '../Charts/HoldMoney'
 import type { ChartsData as HoldMoneyChartsData } from '../Charts/HoldMoney'
+
+const cardStyles = { minWidth: 275, flex: 1, padding: 1 }
 
 const revenueMockData: RevenueChartsData = [
   {
@@ -138,7 +144,7 @@ export function Revenue() {
   const [revenueDates, setRevenueDates] = React.useState<RevenueChartsData>(revenueMockData)
 
   return (
-    <Card sx={{ minWidth: 275, flex: 1 }}>
+    <Card sx={cardStyles} variant="outlined">
       <CardContent>
         <Typography variant='h5' color="text.primary" gutterBottom>
           Доход сервиса
@@ -164,17 +170,19 @@ export function Turnover() {
   const [turnoverDates, setTurnoverDates] = React.useState<RevenueChartsData>(revenueMockData)
 
   return (
-    <Card sx={{ minWidth: 275, flex: 1 }}>
+    <Card sx={cardStyles} variant="outlined">
       <CardContent>
         <Typography variant='h5' color="text.primary" gutterBottom>
           Оборот сервиса
+          <Tooltip title='Денежные средства, которые у нас есть, вместе с hold-транзакциями'>
+            <IconButton>
+              <MDIIcon path={mdiHelpCircleOutline} size={1} />
+            </IconButton>
+          </Tooltip>
         </Typography>
 
         <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
           {turnover}
-        </Typography>
-        <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
-          Денежные средства, которые у нас есть, вместе с hold-транзакциями
         </Typography>
         <RevenueChart data={turnoverDates} />
       </CardContent>
@@ -220,17 +228,19 @@ export function HoldTransaction() {
   const [holdTransactionDates, setHoldTransactionDates] = React.useState<HoldTransactionsChartsData>(mockHoldTransactions)
 
   return (
-    <Card sx={{ minWidth: 275, flex: 1 }}>
+    <Card sx={cardStyles} variant="outlined">
       <CardContent>
-        <Typography variant='h5' color="text.primary" gutterBottom>
-            Количество hold-средств
+        <Typography variant='h5' color="text.secondary" gutterBottom>
+          Количество hold-средств
+          <Tooltip title='Количество транзакций, которые находятся на стороне банка'>
+            <IconButton>
+              <MDIIcon path={mdiHelpCircleOutline} size={1} />
+            </IconButton>
+          </Tooltip>
         </Typography>
 
         <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
           {holdTransactions}
-        </Typography>
-        <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
-          Количество транзакций, которые находятся на стороне банка
         </Typography>
         <HoldTransactionsChart data={holdTransactionDates} />
       </CardContent>
@@ -276,17 +286,19 @@ export function HoldMoney() {
   const [holdMoneyDates, setHoldMoneyDates] = React.useState<HoldMoneyChartsData>(mockHoldMoney)
 
   return (
-    <Card sx={{ minWidth: 275, flex: 1 }}>
+    <Card sx={cardStyles} variant="outlined">
       <CardContent>
-        <Typography variant='h5' color="text.primary" gutterBottom>
+        <Typography variant='overline' color="text.secondary">
             Количество hold-средств
+            <Tooltip title='Денежные средства, которые находятся на стороне банка'>
+              <IconButton>
+                <MDIIcon path={mdiHelpCircleOutline} size={1} />
+              </IconButton>
+            </Tooltip>
         </Typography>
 
-        <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
+        <Typography sx={{ fontWeight: 500 }} variant="h2" color="text.primary" gutterBottom>
           {holdMoney}
-        </Typography>
-        <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
-          Денежные средства, которые находятся на стороне банка
         </Typography>
         <HoldMoneyChart data={holdMoneyDates} />
       </CardContent>
