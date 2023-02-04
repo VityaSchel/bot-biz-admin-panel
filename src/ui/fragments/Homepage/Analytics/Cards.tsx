@@ -7,7 +7,8 @@ import CardActions from '@mui/material/CardActions'
 import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
 import MDIIcon from '@mdi/react'
-import { mdiHelpCircleOutline } from '@mdi/js'
+import { mdiHelpCircleOutline, mdiArrowRight } from '@mdi/js'
+import Stack from '@mui/material/Stack'
 
 import RevenueChart from '../Charts/RevenueChart'
 import type { ChartsData as RevenueChartsData } from '../Charts/RevenueChart'
@@ -146,20 +147,16 @@ export function Revenue() {
   return (
     <Card sx={cardStyles} variant="outlined">
       <CardContent>
-        <Typography variant='h5' color="text.primary" gutterBottom>
-          Доход сервиса
-        </Typography>
+        <CardTitle
+          title='Доход сервиса'
+          description='Денежные средства, которые мы выручили'
+        />
 
-        <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
-          {revenue}
-        </Typography>
-        <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
-          Денежные средства, которые мы выручили
-        </Typography>
+        <CardValue>{revenue}</CardValue>
         <RevenueChart data={revenueDates} />
       </CardContent>
       <CardActions>
-        <Button size="small">Подробнее</Button>
+        <Button size="small">Подробнее <MDIIcon path={mdiArrowRight} size={1} /></Button>
       </CardActions>
     </Card>
   )
@@ -172,22 +169,16 @@ export function Turnover() {
   return (
     <Card sx={cardStyles} variant="outlined">
       <CardContent>
-        <Typography variant='h5' color="text.primary" gutterBottom>
-          Оборот сервиса
-          <Tooltip title='Денежные средства, которые у нас есть, вместе с hold-транзакциями'>
-            <IconButton>
-              <MDIIcon path={mdiHelpCircleOutline} size={1} />
-            </IconButton>
-          </Tooltip>
-        </Typography>
+        <CardTitle 
+          title='Оборот сервиса'
+          description='Денежные средства, которые у нас есть, вместе с hold-транзакциями'
+        />
 
-        <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
-          {turnover}
-        </Typography>
+        <CardValue>{turnover}</CardValue>
         <RevenueChart data={turnoverDates} />
       </CardContent>
       <CardActions>
-        <Button size="small">Подробнее</Button>
+        <Button size="small">Подробнее <MDIIcon path={mdiArrowRight} size={1} /></Button>
       </CardActions>
     </Card>
   )
@@ -230,18 +221,12 @@ export function HoldTransaction() {
   return (
     <Card sx={cardStyles} variant="outlined">
       <CardContent>
-        <Typography variant='h5' color="text.secondary" gutterBottom>
-          Количество hold-средств
-          <Tooltip title='Количество транзакций, которые находятся на стороне банка'>
-            <IconButton>
-              <MDIIcon path={mdiHelpCircleOutline} size={1} />
-            </IconButton>
-          </Tooltip>
-        </Typography>
+        <CardTitle
+          title='Количество hold-транзакций'
+          description='Количество транзакций, которые находятся на стороне банка'
+        />
 
-        <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
-          {holdTransactions}
-        </Typography>
+        <CardValue>{holdTransactions}</CardValue>
         <HoldTransactionsChart data={holdTransactionDates} />
       </CardContent>
       <CardActions>
@@ -288,23 +273,50 @@ export function HoldMoney() {
   return (
     <Card sx={cardStyles} variant="outlined">
       <CardContent>
-        <Typography variant='overline' color="text.secondary">
-            Количество hold-средств
-            <Tooltip title='Денежные средства, которые находятся на стороне банка'>
-              <IconButton>
-                <MDIIcon path={mdiHelpCircleOutline} size={1} />
-              </IconButton>
-            </Tooltip>
-        </Typography>
-
-        <Typography sx={{ fontWeight: 500 }} variant="h2" color="text.primary" gutterBottom>
-          {holdMoney}
-        </Typography>
+        <CardTitle
+          title='Количество hold-средств'
+          description='Денежные средства, которые находятся на стороне банка'
+        />
+        <CardValue>{holdMoney}</CardValue>
         <HoldMoneyChart data={holdMoneyDates} />
       </CardContent>
       <CardActions>
-        <Button size="small">Подробнее</Button>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+        >
+          <
+          <Button size="small">Подробнее <MDIIcon path={mdiArrowRight} size={1} /></Button>
+        </Stack>
       </CardActions>
     </Card>
+  )
+}
+
+function CardTitle(props: { title: string, description: string }) {
+  return (
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="flex-start"
+    >
+      <Typography variant='overline' color="text.secondary">
+        {props.title}
+      </Typography>
+
+      <Tooltip title={props.description} placement="bottom-end">
+        <IconButton>
+          <MDIIcon path={mdiHelpCircleOutline} size={1} />
+        </IconButton>
+      </Tooltip>
+    </Stack>
+  )
+}
+
+function CardValue(props: { children: React.ReactNode }) {
+  return (
+    <Typography sx={{ fontWeight: 500, mb: 2 }} variant="h3" color="text.primary" gutterBottom>
+      {props.children}
+    </Typography>
   )
 }
