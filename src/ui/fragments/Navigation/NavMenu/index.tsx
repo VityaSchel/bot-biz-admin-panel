@@ -17,9 +17,10 @@ import {
   mdiAccountNetwork,
   mdiAccountMultiple,
   mdiRobot,
-  mdiWeb,
+  mdiCashClock,
   mdiCashSync,
-  mdiMessageText
+  mdiMessageText,
+  mdiHomeAnalytics
 } from '@mdi/js'
 
 export default function NavMenu() {
@@ -31,6 +32,17 @@ export default function NavMenu() {
       role='presentation'
     >
       <List>
+        <ListItem disablePadding>
+          <Link href='/' className={styles.link}>
+            <ListItemButton>
+              <ListItemIcon>
+                <MDIIcon path={mdiHomeAnalytics} size={1} />
+              </ListItemIcon>
+              <ListItemText primary={t('homepage')} />
+            </ListItemButton>
+          </Link>
+        </ListItem>
+        <Divider />
         <ListSubheader component='div'>
           {t('financial_statistics.subheader')}
         </ListSubheader>
@@ -65,6 +77,16 @@ export default function NavMenu() {
             </ListItemButton>
           </Link>
         </ListItem>
+        <ListItem disablePadding>
+          <Link href='/payouts' className={styles.link}>
+            <ListItemButton>
+              <ListItemIcon>
+                <MDIIcon path={mdiCashClock} size={1} />
+              </ListItemIcon>
+              <ListItemText primary={t('financial_statistics.payouts')} />
+            </ListItemButton>
+          </Link>
+        </ListItem>
       </List>
       <Divider />
       <List>
@@ -72,12 +94,12 @@ export default function NavMenu() {
           {t('users.subheader')}
         </ListSubheader>
         <ListItem disablePadding>
-          <Link href='/services-users' className={styles.link}>
+          <Link href='/sources/owners' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiAccountNetwork} size={1} />
               </ListItemIcon>
-              <ListItemText primary={t('users.service')} />
+              <ListItemText primary={t('users.sources_owners')} />
             </ListItemButton>
           </Link>
         </ListItem>
@@ -87,46 +109,20 @@ export default function NavMenu() {
               <ListItemIcon>
                 <MDIIcon path={mdiAccountMultiple} size={1} />
               </ListItemIcon>
-              <ListItemText primary={t('users.sources')} />
+              <ListItemText primary={t('users.sources_users')} />
             </ListItemButton>
           </Link>
         </ListItem>
       </List>
       <Divider />
       <List>
-        <ListSubheader component='div'>
-          {t('sources.subheader')}
-        </ListSubheader>
         <ListItem disablePadding>
-          <Link href='/sources/bots' className={styles.link}>
+          <Link href='/sources' className={styles.link}>
             <ListItemButton>
               <ListItemIcon>
                 <MDIIcon path={mdiRobot} size={1} />
               </ListItemIcon>
-              <ListItemText primary={t('sources.bots')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link href='/sources/sites' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiWeb} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('sources.sites')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem disablePadding>
-          <Link href='/payouts' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiCashSync} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('payouts')} />
+              <ListItemText primary={t('sources.subheader')} />
             </ListItemButton>
           </Link>
         </ListItem>
