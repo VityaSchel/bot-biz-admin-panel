@@ -1,5 +1,7 @@
 # Фронтенд админки x5.io
 
+Демо: [https://x5io-admin-panel-demo.netlify.app/](https://x5io-admin-panel-demo.netlify.app/)
+
 ## Подготовка
 
 1. Клонируйте репозиторий
