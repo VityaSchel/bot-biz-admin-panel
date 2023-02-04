@@ -144,6 +144,7 @@ const revenueMockData: RevenueChartsData = [
 export function Revenue() {
   const [revenue, setRevenue] = React.useState<string>('117,491 ₽')
   const [revenueDates, setRevenueDates] = React.useState<RevenueChartsData>(revenueMockData)
+  const [chartInterval, setChartInterval] = React.useState<ChartIntervalsDefaultValues>('24h')
 
   return (
     <Card sx={cardStyles} variant="outlined">
@@ -157,7 +158,20 @@ export function Revenue() {
         <RevenueChart data={revenueDates} />
       </CardContent>
       <CardActions>
-        <Button size="small">Подробнее <MDIIcon path={mdiArrowRight} size={1} /></Button>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems='flex-end'
+          sx={{ width: '100%' }}
+        >
+          <ChartsIntervalSelect
+            value={chartInterval}
+            setValue={setChartInterval}
+          />
+          <Button size="small" sx={{ textTransform: 'none' }}>
+            Подробнее&nbsp;<MDIIcon path={mdiArrowRight} size={1} />
+          </Button>
+        </Stack>
       </CardActions>
     </Card>
   )
@@ -166,6 +180,7 @@ export function Revenue() {
 export function Turnover() {
   const [turnover, setTurnover] = React.useState<string>('2,971,505 ₽')
   const [turnoverDates, setTurnoverDates] = React.useState<RevenueChartsData>(revenueMockData)
+  const [chartInterval, setChartInterval] = React.useState<ChartIntervalsDefaultValues>('24h')
 
   return (
     <Card sx={cardStyles} variant="outlined">
@@ -179,7 +194,20 @@ export function Turnover() {
         <RevenueChart data={turnoverDates} />
       </CardContent>
       <CardActions>
-        <Button size="small">Подробнее <MDIIcon path={mdiArrowRight} size={1} /></Button>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems='flex-end'
+          sx={{ width: '100%' }}
+        >
+          <ChartsIntervalSelect
+            value={chartInterval}
+            setValue={setChartInterval}
+          />
+          <Button size="small" sx={{ textTransform: 'none' }}>
+            Подробнее&nbsp;<MDIIcon path={mdiArrowRight} size={1} />
+          </Button>
+        </Stack>
       </CardActions>
     </Card>
   )
@@ -218,7 +246,8 @@ const mockHoldTransactions: HoldTransactionsChartsData = [
 export function HoldTransaction() {
   const [holdTransactions, setHoldTransactions] = React.useState<string>('3940')
   const [holdTransactionDates, setHoldTransactionDates] = React.useState<HoldTransactionsChartsData>(mockHoldTransactions)
-
+  const [chartInterval, setChartInterval] = React.useState<ChartIntervalsDefaultValues>('24h')
+  
   return (
     <Card sx={cardStyles} variant="outlined">
       <CardContent>
@@ -231,7 +260,20 @@ export function HoldTransaction() {
         <HoldTransactionsChart data={holdTransactionDates} />
       </CardContent>
       <CardActions>
-        <Button size="small">Подробнее</Button>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems='flex-end'
+          sx={{ width: '100%' }}
+        >
+          <ChartsIntervalSelect
+            value={chartInterval}
+            setValue={setChartInterval}
+          />
+          <Button size="small" sx={{ textTransform: 'none' }}>
+            Подробнее&nbsp;<MDIIcon path={mdiArrowRight} size={1} />
+          </Button>
+        </Stack>
       </CardActions>
     </Card>
   )
@@ -293,7 +335,9 @@ export function HoldMoney() {
             value={chartInterval}
             setValue={setChartInterval}
           />
-          <Button size="small">Подробнее <MDIIcon path={mdiArrowRight} size={1} /></Button>
+          <Button size="small" sx={{ textTransform: 'none' }}>
+            Подробнее&nbsp;<MDIIcon path={mdiArrowRight} size={1} />
+          </Button>
         </Stack>
       </CardActions>
     </Card>

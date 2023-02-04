@@ -19,13 +19,11 @@ export default function ChartsIntervalSelect(props: { value: Value, setValue: Re
 
   return (
     <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-      <InputLabel /*id="demo-simple-select-standard-label"*/>Интервал</InputLabel>
       <Select
         // labelId="demo-simple-select-standard-label"
         // id='interval-select' TODO: fix duplicated ids
         value={props.value}
         onChange={handleChange}
-        label='Интервал'
       >
         <MenuItem value={'24h'}>За последние 24 часа</MenuItem>
         <MenuItem value={'7d'}>За последние 7 суток</MenuItem>
