@@ -16,6 +16,7 @@ import HoldTransactionsChart from '../Charts/HoldTransactions'
 import type { ChartsData as HoldTransactionsChartsData } from '../Charts/HoldTransactions'
 import HoldMoneyChart from '../Charts/HoldMoney'
 import type { ChartsData as HoldMoneyChartsData } from '../Charts/HoldMoney'
+import ChartsIntervalSelect, { ChartIntervalsDefaultValues } from '/src/ui/components/ChartsIntervalSelect'
 
 const cardStyles = { minWidth: 275, flex: 1, padding: 1 }
 
@@ -269,6 +270,7 @@ const mockHoldMoney: HoldMoneyChartsData = [
 export function HoldMoney() {
   const [holdMoney, setHoldMoney] = React.useState<string>('1,054,027 ₽')
   const [holdMoneyDates, setHoldMoneyDates] = React.useState<HoldMoneyChartsData>(mockHoldMoney)
+  const [chartInterval, setChartInterval] = React.useState<ChartIntervalsDefaultValues>('24h')
 
   return (
     <Card sx={cardStyles} variant="outlined">
@@ -284,8 +286,13 @@ export function HoldMoney() {
         <Stack
           direction="row"
           justifyContent="space-between"
+          alignItems='flex-end'
+          sx={{ width: '100%' }}
         >
-          <
+          <ChartsIntervalSelect
+            value={chartInterval}
+            setValue={setChartInterval}
+          />
           <Button size="small">Подробнее <MDIIcon path={mdiArrowRight} size={1} /></Button>
         </Stack>
       </CardActions>

@@ -3,36 +3,34 @@ import InputLabel from '@mui/material/InputLabel'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 
-// type Value = [Date, Date]
-type Value = '24h' | '7d' | ''// | [Date, Date]
-export default function ChartsIntervalSelect(props: { value: Value, setValue: React.SetStateAction<Value>[1] }) {
-  type SelectValue = number | 'custom'
+type DefaultValues = '24h' | '7d' | '30d' | '90d'
+type Value = DefaultValues// | [Date, Date]
+export default function ChartsIntervalSelect(props: { value: Value, setValue: React.Dispatch<Value> }) {
+  type SelectValue = DefaultValues | 'custom'
   const handleChange = (e: SelectChangeEvent<SelectValue>) => {
     const value = e.target.value as SelectValue
     if(value === 'custom') {
       //
     } else {
       // props.setValue([Date.now() - 1000*60*value, new Date()])
+      props.setValue(value)
     }
   }
 
   return (
     <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-      <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+      <InputLabel /*id="demo-simple-select-standard-label"*/>Интервал</InputLabel>
       <Select
-        labelId="demo-simple-select-standard-label"
-        id="demo-simple-select-standard"
+        // labelId="demo-simple-select-standard-label"
+        // id='interval-select' TODO: fix duplicated ids
         value={props.value}
         onChange={handleChange}
-        label="Age"
+        label='Интервал'
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={24}>За последние 24 часа</MenuItem>
-        <MenuItem value={7 * 24}>За последние 7 суток</MenuItem>
-        <MenuItem value={30 * 24}>За последние 30 дней</MenuItem>
-        <MenuItem value={90 * 24}>За последние 90 дней</MenuItem>
+        <MenuItem value={'24h'}>За последние 24 часа</MenuItem>
+        <MenuItem value={'7d'}>За последние 7 суток</MenuItem>
+        <MenuItem value={'30d'}>За последние 30 дней</MenuItem>
+        <MenuItem value={'90d'}>За последние 90 дней</MenuItem>
         <MenuItem value='custom'>Задать свой интервал...</MenuItem>
       </Select>
     </FormControl>
