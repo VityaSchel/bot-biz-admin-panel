@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack'
-import { Revenue, Turnover, HoldTransaction } from './Cards'
+import { Revenue, Turnover, HoldTransaction, HoldMoney } from './Cards'
 
 export default function Analytics() {
   return (
@@ -10,6 +10,7 @@ export default function Analytics() {
       </Stack>
       <Stack spacing={2} direction='row'>
         <HoldTransaction />
+        <HoldMoney />
       </Stack>
     </Stack>
   )

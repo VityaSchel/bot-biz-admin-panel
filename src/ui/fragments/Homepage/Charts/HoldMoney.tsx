@@ -2,17 +2,17 @@ import React from 'react'
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import seedColor from 'seed-color'
 
-export type ChartsData = { date: Date, holdTransactions: number }[]
+export type ChartsData = { date: Date, holdMoney: number }[]
 
 const formatDataForChart = (input: ChartsData) => {
   return input.map(day => {
-    const chartDay: { name: string, [key: `source_${string}`]: number } = {
+    const chartDay: { name: string, holdMoney: number } = {
       name: Intl.DateTimeFormat('ru-RU', {
         day: '2-digit',
         month: '2-digit',
         // year: 'numeric'
       }).format(day.date),
-      holdTransactions: day.holdTransactions
+      holdMoney: day.holdMoney
     }
 
     return chartDay
@@ -40,14 +40,17 @@ export default function HoldTransactionsChart(props: { data: ChartsData }) {
         />
         <YAxis 
           width={100}
+          tickFormatter={(value: number) => value.toLocaleString('ru-RU') + ' ₽'} 
         />
-        <Tooltip />
+        <Tooltip 
+          formatter={(value: number) => value.toLocaleString('ru-RU') + ' ₽'}
+        />
         <Legend />
         <Bar 
-          dataKey={'holdTransactions'}
-          name={'Транзакции на холде'}
+          dataKey={'holdMoney'}
+          name={'Средства на холде'}
           stackId='a' 
-          fill={seedColor('holdTransactions').toHex()}
+          fill={seedColor('holdMoney').toHex()}
         />
       </BarChart>
     </ResponsiveContainer>

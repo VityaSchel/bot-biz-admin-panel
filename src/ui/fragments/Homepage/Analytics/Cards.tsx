@@ -9,6 +9,8 @@ import RevenueChart from '../Charts/RevenueChart'
 import type { ChartsData as RevenueChartsData } from '../Charts/RevenueChart'
 import HoldTransactionsChart from '../Charts/HoldTransactions'
 import type { ChartsData as HoldTransactionsChartsData } from '../Charts/HoldTransactions'
+import HoldMoneyChart from '../Charts/HoldMoney'
+import type { ChartsData as HoldMoneyChartsData } from '../Charts/HoldMoney'
 
 const revenueMockData: RevenueChartsData = [
   {
@@ -215,7 +217,7 @@ const mockHoldTransactions: HoldTransactionsChartsData = [
 ]
 export function HoldTransaction() {
   const [holdTransactions, setHoldTransactions] = React.useState<string>('3940')
-  const [turnoverDates, setTurnoverDates] = React.useState<RevenueChartsData>(mockHoldTransactions)
+  const [holdTransactionDates, setHoldTransactionDates] = React.useState<HoldTransactionsChartsData>(mockHoldTransactions)
 
   return (
     <Card sx={{ minWidth: 275, flex: 1 }}>
@@ -230,7 +232,63 @@ export function HoldTransaction() {
         <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
           Количество транзакций, которые находятся на стороне банка
         </Typography>
-        <HoldTransactionsChart data={turnoverDates} />
+        <HoldTransactionsChart data={holdTransactionDates} />
+      </CardContent>
+      <CardActions>
+        <Button size="small">Подробнее</Button>
+      </CardActions>
+    </Card>
+  )
+}
+
+const mockHoldMoney: HoldMoneyChartsData = [
+  {
+    date: new Date('2023-01-22'),
+    holdMoney: 131753
+  },
+  {
+    date: new Date('2023-01-23'),
+    holdMoney: 118578
+  },
+  {
+    date: new Date('2023-01-24'),
+    holdMoney: 158104
+  },
+  {
+    date: new Date('2023-01-25'),
+    holdMoney: 131753
+  },
+  {
+    date: new Date('2023-01-26'),
+    holdMoney: 144928
+  },
+  {
+    date: new Date('2023-01-27'),
+    holdMoney: 197630
+  },
+  {
+    date: new Date('2023-01-28'),
+    holdMoney: 171279
+  },
+]
+export function HoldMoney() {
+  const [holdMoney, setHoldMoney] = React.useState<string>('1,054,027 ₽')
+  const [holdMoneyDates, setHoldMoneyDates] = React.useState<HoldMoneyChartsData>(mockHoldMoney)
+
+  return (
+    <Card sx={{ minWidth: 275, flex: 1 }}>
+      <CardContent>
+        <Typography variant='h5' color="text.primary" gutterBottom>
+            Количество hold-средств
+        </Typography>
+
+        <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
+          {holdMoney}
+        </Typography>
+        <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
+          Денежные средства, которые находятся на стороне банка
+        </Typography>
+        <HoldMoneyChart data={holdMoneyDates} />
       </CardContent>
       <CardActions>
         <Button size="small">Подробнее</Button>
