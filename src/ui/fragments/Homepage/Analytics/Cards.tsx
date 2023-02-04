@@ -7,8 +7,10 @@ import CardActions from '@mui/material/CardActions'
 
 import RevenueChart from '../Charts/RevenueChart'
 import type { ChartsData as RevenueChartsData } from '../Charts/RevenueChart'
+import HoldTransactionsChart from '../Charts/HoldTransactions'
+import type { ChartsData as HoldTransactionsChartsData } from '../Charts/HoldTransactions'
 
-const mockData: RevenueChartsData = [
+const revenueMockData: RevenueChartsData = [
   {
     date: new Date('2023-01-22'),
     sources: [
@@ -131,7 +133,7 @@ const mockData: RevenueChartsData = [
 ]
 export function Revenue() {
   const [revenue, setRevenue] = React.useState<string>('117,491 ₽')
-  const [revenueDates, setRevenueDates] = React.useState<RevenueChartsData>(mockData)
+  const [revenueDates, setRevenueDates] = React.useState<RevenueChartsData>(revenueMockData)
 
   return (
     <Card sx={{ minWidth: 275, flex: 1 }}>
@@ -157,7 +159,7 @@ export function Revenue() {
 
 export function Turnover() {
   const [turnover, setTurnover] = React.useState<string>('2,971,505 ₽')
-  const [turnoverDates, setTurnoverDates] = React.useState<RevenueChartsData>(mockData)
+  const [turnoverDates, setTurnoverDates] = React.useState<RevenueChartsData>(revenueMockData)
 
   return (
     <Card sx={{ minWidth: 275, flex: 1 }}>
@@ -173,6 +175,62 @@ export function Turnover() {
           Денежные средства, которые у нас есть, вместе с hold-транзакциями
         </Typography>
         <RevenueChart data={turnoverDates} />
+      </CardContent>
+      <CardActions>
+        <Button size="small">Подробнее</Button>
+      </CardActions>
+    </Card>
+  )
+}
+
+const mockHoldTransactions: HoldTransactionsChartsData = [
+  {
+    date: new Date('2023-01-22'),
+    holdTransactions: 540
+  },
+  {
+    date: new Date('2023-01-23'),
+    holdTransactions: 493
+  },
+  {
+    date: new Date('2023-01-24'),
+    holdTransactions: 381
+  },
+  {
+    date: new Date('2023-01-25'),
+    holdTransactions: 399
+  },
+  {
+    date: new Date('2023-01-26'),
+    holdTransactions: 600
+  },
+  {
+    date: new Date('2023-01-27'),
+    holdTransactions: 747
+  },
+  {
+    date: new Date('2023-01-28'),
+    holdTransactions: 790
+  },
+]
+export function HoldTransaction() {
+  const [holdTransactions, setHoldTransactions] = React.useState<string>('3940')
+  const [turnoverDates, setTurnoverDates] = React.useState<RevenueChartsData>(mockHoldTransactions)
+
+  return (
+    <Card sx={{ minWidth: 275, flex: 1 }}>
+      <CardContent>
+        <Typography variant='h5' color="text.primary" gutterBottom>
+            Количество hold-средств
+        </Typography>
+
+        <Typography sx={{ mt: 1.5 }} variant="h2" color="text.primary" gutterBottom>
+          {holdTransactions}
+        </Typography>
+        <Typography sx={{ mt: 1.5, fontSize: 14 }} color="text.secondary" gutterBottom>
+          Количество транзакций, которые находятся на стороне банка
+        </Typography>
+        <HoldTransactionsChart data={turnoverDates} />
       </CardContent>
       <CardActions>
         <Button size="small">Подробнее</Button>
