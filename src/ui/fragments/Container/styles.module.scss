@@ -1,0 +1,15 @@
+.main {
+  .page {
+    padding-left: 300px;
+    margin-top: 64px;
+
+    .leftMenu {
+      position: fixed;
+      left: 0;
+      top: 64px;
+      max-width: 301px;
+      padding-right: 1px;
+      border-right: 1px solid #eee;
+    }
+  }
+}

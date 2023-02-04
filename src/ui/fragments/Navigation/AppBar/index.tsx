@@ -8,28 +8,12 @@ import Hamburger from 'hamburger-react'
 import UserMenu from './UserMenu'
 import { useTranslation } from 'next-i18next'
 
-export default function AppBar(props: {
-  isMenuOpen: boolean
-  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
-}) {
+export default function AppBar() {
   const { t } = useTranslation('common')
 
   return (
     <MUIAppBar position="fixed">
       <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2, p: 0 }}
-        >
-          <Hamburger 
-            toggled={props.isMenuOpen} 
-            toggle={props.setMenuOpen} 
-            size={20}
-          />
-        </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {t('title')}
         </Typography>
