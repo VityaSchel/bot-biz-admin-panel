@@ -1,12 +1,12 @@
 import styles from './page.module.css'
 import Container from '/src/ui/fragments/Container'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import HomepageCharts from '../ui/fragments/Homepage/Charts'
+import Analytics from '../ui/fragments/Homepage/Analytics'
 
 export default function Home() {
   return (
     <Container>
-      <HomepageCharts />
+      <Analytics />
     </Container>
   )
 }
