@@ -29,7 +29,7 @@ export default function HoldTransactionsChart(props: { data: ChartsData }) {
         margin={{
           top: 20,
           right: 30,
-          left: 20,
+          left: 0,
           bottom: 5,
         }}
       >

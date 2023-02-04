@@ -1,18 +1,22 @@
-import Stack from '@mui/material/Stack'
+import Grid from '@mui/material/Grid'
 import { Revenue, Turnover, HoldTransaction, HoldMoney } from './Cards'
 
 export default function Analytics() {
   return (
-    <Stack spacing={2} sx={{ padding: 5 }}>
-      <Stack spacing={2} direction='row'>
+    <Grid container spacing={2} sx={{ padding: 5 }}>
+      <Grid item xs={12} lg={6}>
         <Revenue />
+      </Grid>
+      <Grid item xs={12} lg={6}>
         <Turnover />
-      </Stack>
-      <Stack spacing={2} direction='row'>
+      </Grid>
+      <Grid item xs={12} lg={6}>
         <HoldTransaction />
+      </Grid>
+      <Grid item xs={12} lg={6}>
         <HoldMoney />
-      </Stack>
-    </Stack>
+      </Grid>
+    </Grid>
   )
 }
 
