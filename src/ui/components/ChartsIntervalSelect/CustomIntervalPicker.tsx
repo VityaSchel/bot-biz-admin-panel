@@ -7,6 +7,7 @@ import { DateTimePicker } from '@mui/x-date-pickers'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import FormHelperText from '@mui/material/FormHelperText'
+import { Stack } from '@mui/material'
 
 export default function CustomIntervalPicker(props: { 
   open: boolean, 
@@ -16,7 +17,7 @@ export default function CustomIntervalPicker(props: {
 }) {
   const [start, setStart] = React.useState<Date | null | undefined>()
   const [end, setEnd] = React.useState<Date | null | undefined>()
-  // const [error, setError] = React.useState<false | >(false)
+  const [error, setError] = React.useState<false | string>(false)
 
   React.useEffect(() => {
     if(props.open) {
@@ -30,6 +31,13 @@ export default function CustomIntervalPicker(props: {
     }
   }, [open])
 
+  React.useEffect(() => {
+    if(!start) setError('Не указана начальная дата')
+    else if(!end) setError('Не указана конечная дата')
+    else if(start.getTime() > end.getTime()) setError('Начальная дата позднее конечной')
+    else setError(false)
+  }, [start, end])
+
   const handleSubmit = () => {
     props.onSubmit(start as Date, end as Date)
   }
@@ -37,25 +45,30 @@ export default function CustomIntervalPicker(props: {
   return (
     <Dialog open={props.open} onClose={props.onCancel}>
       <DialogTitle>Выберете интервал дат:</DialogTitle>
-      <DialogContent sx={{ display: 'flex', alignItems: 'center' }}>
-        <DateTimePicker
-          onChange={value => setStart(value)}
-          value={start}
-          renderInput={props => <TextField {...props} />}
-        />
-        &nbsp;—&nbsp;
-        <DateTimePicker
-          onChange={value => setEnd(value)}
-          value={end}
-          renderInput={props => <TextField {...props} />}
-        />
-        <FormHelperText>{error}</FormHelperText>
+      <DialogContent>
+        <Stack
+          alignItems="center"
+          direction="row"
+          gap={2}
+        >
+          <DateTimePicker
+            onChange={value => setStart(value)}
+            value={start}
+            renderInput={props => <TextField {...props} />}
+          />
+          <span>—</span>
+          <DateTimePicker
+            onChange={value => setEnd(value)}
+            value={end}
+            renderInput={props => <TextField {...props} />}
+          />
+        </Stack>
+        
+        {error && <FormHelperText error>{error}</FormHelperText>}
       </DialogContent>
       <DialogActions>
         <Button onClick={props.onCancel}>Отмена</Button>
-        <Button onClick={handleSubmit} disabled={
-          !start || !end || start.getTime() > end.getTime()
-        }>Установить</Button>
+        <Button onClick={handleSubmit} disabled={error !== false}>Установить</Button>
       </DialogActions>
     </Dialog>
   )

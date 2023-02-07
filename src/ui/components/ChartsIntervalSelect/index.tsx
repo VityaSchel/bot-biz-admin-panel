@@ -23,6 +23,11 @@ export default function ChartsIntervalSelect(props: { value: Value, setValue: Re
     }
   }
 
+  const handleSetCustomDate = (start: Date, end: Date) => {
+    setCustomDate([start, end])
+    setCustomDatePickerVisible(false)
+  }
+
   return (
     <>
       <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -43,7 +48,7 @@ export default function ChartsIntervalSelect(props: { value: Value, setValue: Re
         open={customDatePickerVisible}
         value={customDate}
         onCancel={() => setCustomDatePickerVisible(false)}
-        onSubmit={(start, end) => setCustomDate([start, end])}
+        onSubmit={handleSetCustomDate}
       />
     </>
   )
