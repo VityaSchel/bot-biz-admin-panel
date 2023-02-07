@@ -13,6 +13,10 @@ const nextConfig = {
     })
 
     return config
+  },
+  images: {
+    // FOR MOCK DATA! TODO: Remove in production
+    domains: ['is1-ssl.mzstatic.com', 'is2-ssl.mzstatic.com', 'avatars.mds.yandex.net']
   }
 }
 
