@@ -1,7 +1,9 @@
 .main {
   .page {
+    $headerHeight: 64px;
     padding-left: 300px;
     margin-top: 64px;
+    min-height: calc(100vh - $headerHeight);
 
     .leftMenu {
       position: fixed;
