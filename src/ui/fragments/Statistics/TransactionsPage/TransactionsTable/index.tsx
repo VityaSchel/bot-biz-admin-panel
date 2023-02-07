@@ -1,5 +1,6 @@
 import React from 'react'
-import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams } from '@mui/x-data-grid'
+import styles from './styles.module.scss'
+import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams, ruRU } from '@mui/x-data-grid'
 import Chip from '@mui/material/Chip'
 import CheckCircle from '@mui/icons-material/CheckCircle'
 import PendingCircle from '@mui/icons-material/Pending'
@@ -12,7 +13,8 @@ import Link from 'next/link'
 
 type Transaction = {
   id: string,
-  sum: number
+  datetime: Date,
+  sum: number,
   addSum: number,
   checkoutService: string,
   operationType: string,
@@ -21,24 +23,33 @@ type Transaction = {
   site: string
 }
 
-const currencyValueGetter = (params: GridValueGetterParams) =>
+const currencyValueGetter = (params: GridValueFormatterParams) =>
   (params.value as number).toLocaleString(undefined, { minimumFractionDigits: 2 }) + ' ₽'
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', flex: 1 },
   {
+    field: 'datetime',
+    type: 'datetime',
+    headerName: 'Дата',
+    flex: 2,
+    editable: true
+  },
+  {
     field: 'sum',
+    type: 'number',
     headerName: 'Полная сумма',
     flex: 2,
     editable: true,
-    valueGetter: currencyValueGetter
+    valueFormatter: currencyValueGetter
   },
   {
     field: 'addSum',
+    type: 'number',
     headerName: 'Сумма пополнения',
     flex: 2,
     editable: true,
-    valueGetter: currencyValueGetter
+    valueFormatter: currencyValueGetter
   },
   {
     field: 'checkoutService',
@@ -51,6 +62,7 @@ const columns: GridColDef[] = [
     headerName: 'Тип операции',
     description: 'Здесь будут описаны типы операций',
     flex: 4,
+    editable: true,
     // valueGetter: (params: GridValueGetterParams) =>
     //   ({
     //     'operationType1': 'Тип 1',
@@ -61,7 +73,8 @@ const columns: GridColDef[] = [
   {
     field: 'notificationStatus',
     headerName: 'Статус уведомления',
-    flex: 3.1,
+    flex: 3.4,
+    editable: true,
     renderCell: (params: GridRenderCellParams) => (
       <Chip 
         icon={{
@@ -83,7 +96,7 @@ const columns: GridColDef[] = [
   {
     field: 'source',
     headerName: 'Источник',
-    flex: 6,
+    flex: 5.6,
     renderCell: (params: GridRenderCellParams) => (
       <Stack direction='row' gap={2} alignItems='center'>
         <Image src={params.row.source.picture} width={30} height={30} style={{ borderRadius: 99 }} alt='Аватарка источника' />
@@ -98,8 +111,9 @@ const columns: GridColDef[] = [
     field: 'site',
     headerName: 'Сайт',
     flex: 4,
+    editable: true,
     renderCell: (params: GridRenderCellParams) => (
-      <Link href={params.row.site}>
+      <Link href={params.row.site} className={styles.link}>
         {params.row.site}
       </Link>
     )
@@ -113,16 +127,16 @@ const mockSources = [
 ]
 
 const mockData: Transaction[] = [
-  { id: '178123', sum: 1000, addSum: 893.78, checkoutService: 'QIWI', operationType: 'Пополнение кошелька', notificationStatus: 'RECEIVED', source: mockSources[0].source, site: mockSources[0].site },
-  { id: '168120', sum: 3199, addSum: 3101.00, checkoutService: 'ЮКасса', operationType: 'Оплата подписки', notificationStatus: 'RECEIVED', source: mockSources[1].source, site: mockSources[1].site },
-  { id: '167192', sum: 569, addSum: 553.44, checkoutService: 'QIWI', operationType: 'Покупка товара', notificationStatus: 'UNKNOWN', source: mockSources[2].source, site: mockSources[2].site },
-  { id: '165751', sum: 500, addSum: 489.32, checkoutService: 'Coingate', operationType: 'Пополнение кошелька', notificationStatus: 'RECEIVED', source: mockSources[0].source, site: mockSources[0].site },
-  { id: '157101', sum: 1000, addSum: 960.99, checkoutService: 'Лава', operationType: 'Пополнение кошелька', notificationStatus: 'SENT', source: mockSources[0].source, site: mockSources[0].site },
-  { id: '150921', sum: 1200, addSum: 1131.42, checkoutService: 'Лава', operationType: 'Пополнение кошелька', notificationStatus: 'FAILURE', source: mockSources[0].source, site: mockSources[0].site },
-  { id: '149851', sum: 100, addSum: 98.12, checkoutService: 'FreeKassa', operationType: 'Покупка суперлайка', notificationStatus: 'RECEIVED', source: mockSources[0].source, site: mockSources[0].site },
-  { id: '149601', sum: 11000, addSum: 10693.87, checkoutService: 'QIWI', operationType: 'Пополнение кошелька', notificationStatus: 'FAILURE', source: mockSources[0].source, site: mockSources[0].site },
-  { id: '147123', sum: 2399, addSum: 1384.34, checkoutService: 'ЮКасса', operationType: 'Продление подписки', notificationStatus: 'SENT', source: mockSources[1].source, site: mockSources[1].site },
-  { id: '132190', sum: 199, addSum: 194.11, checkoutService: 'ЮКасса', operationType: 'Оплата промо подписки', notificationStatus: 'SENT', source: mockSources[1].source, site: mockSources[1].site },
+  { id: '178123', datetime: new Date(Date.now() - 1000), sum: 1000, addSum: 893.78, checkoutService: 'QIWI', operationType: 'Пополнение кошелька', notificationStatus: 'RECEIVED', source: mockSources[0].source, site: mockSources[0].site },
+  { id: '168120', datetime: new Date(Date.now() - 10000), sum: 3199, addSum: 3101.00, checkoutService: 'ЮКасса', operationType: 'Оплата подписки', notificationStatus: 'RECEIVED', source: mockSources[1].source, site: mockSources[1].site },
+  { id: '167192', datetime: new Date(Date.now() - 90000), sum: 569, addSum: 553.44, checkoutService: 'QIWI', operationType: 'Покупка товара', notificationStatus: 'UNKNOWN', source: mockSources[2].source, site: mockSources[2].site },
+  { id: '165751', datetime: new Date(Date.now() - 500000), sum: 500, addSum: 489.32, checkoutService: 'Coingate', operationType: 'Пополнение кошелька', notificationStatus: 'RECEIVED', source: mockSources[0].source, site: mockSources[0].site },
+  { id: '157101', datetime: new Date(Date.now() - 1500000), sum: 1000, addSum: 960.99, checkoutService: 'Лава', operationType: 'Пополнение кошелька', notificationStatus: 'SENT', source: mockSources[0].source, site: mockSources[0].site },
+  { id: '150921', datetime: new Date(Date.now() - 1800000), sum: 1200, addSum: 1131.42, checkoutService: 'Лава', operationType: 'Пополнение кошелька', notificationStatus: 'FAILURE', source: mockSources[0].source, site: mockSources[0].site },
+  { id: '149851', datetime: new Date(Date.now() - 4500000), sum: 100, addSum: 98.12, checkoutService: 'FreeKassa', operationType: 'Покупка суперлайка', notificationStatus: 'RECEIVED', source: mockSources[0].source, site: mockSources[0].site },
+  { id: '149601', datetime: new Date(Date.now() - 10000000), sum: 11000, addSum: 10693.87, checkoutService: 'QIWI', operationType: 'Пополнение кошелька', notificationStatus: 'FAILURE', source: mockSources[0].source, site: mockSources[0].site },
+  { id: '147123', datetime: new Date(Date.now() - 20000000), sum: 2399, addSum: 1384.34, checkoutService: 'ЮКасса', operationType: 'Продление подписки', notificationStatus: 'SENT', source: mockSources[1].source, site: mockSources[1].site },
+  { id: '132190', datetime: new Date(Date.now() - 50000000), sum: 199, addSum: 194.11, checkoutService: 'ЮКасса', operationType: 'Оплата промо подписки', notificationStatus: 'SENT', source: mockSources[1].source, site: mockSources[1].site },
 ]
 
 export default function TransactionsTable() {
@@ -131,13 +145,15 @@ export default function TransactionsTable() {
   return (
     <Stack
       direction='column'
-      sx={{ padding: 1, minHeight: 'inherit' }}
+      sx={{ padding: 5, minHeight: 'inherit' }}
     >
       <DataGrid
-        rows={data}
+        loading={data === null}
+        rows={data as Transaction[]}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        localeText={ruRU}
+        pageSize={10}
+        rowsPerPageOptions={[10, 50]}
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
         sx={{ height: 'inherit' }}
