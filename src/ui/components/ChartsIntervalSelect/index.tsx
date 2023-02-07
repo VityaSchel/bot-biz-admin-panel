@@ -3,20 +3,20 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
-import { DateTimePicker } from '@mui/x-date-pickers'
 import { TextField } from '@mui/material'
+import CustomIntervalPicker from './CustomIntervalPicker'
 
 type DefaultValues = '24h' | '7d' | '30d' | '90d'
 type Value = DefaultValues// | [Date, Date]
 export default function ChartsIntervalSelect(props: { value: Value, setValue: React.Dispatch<Value> }) {
-  const [customDate, setCustomDate] = React.useState<null | Date>(null)
+  const [customDate, setCustomDate] = React.useState<null | [Date, Date]>(null)
   const [customDatePickerVisible, setCustomDatePickerVisible] = React.useState(false)
 
   type SelectValue = DefaultValues | 'custom'
   const handleChange = (e: SelectChangeEvent<SelectValue>) => {
     const value = e.target.value as SelectValue
     if(value === 'custom') {
-      //
+      setCustomDatePickerVisible(true)
     } else {
       // props.setValue([Date.now() - 1000*60*value, new Date()])
       props.setValue(value)
@@ -39,13 +39,12 @@ export default function ChartsIntervalSelect(props: { value: Value, setValue: Re
           <MenuItem value='custom'>Задать свой интервал...</MenuItem>
         </Select>
       </FormControl>
-      {customDatePickerVisible && (
-        <DateTimePicker
-          onChange={value => setCustomDate(value)}
-          value={customDate}
-          renderInput={props => <TextField {...props} />}
-        />
-      )}
+      <CustomIntervalPicker
+        open={customDatePickerVisible}
+        value={customDate}
+        onCancel={() => setCustomDatePickerVisible(false)}
+        onSubmit={(start, end) => setCustomDate([start, end])}
+      />
     </>
   )
 }
