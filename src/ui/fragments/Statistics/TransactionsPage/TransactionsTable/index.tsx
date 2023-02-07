@@ -8,6 +8,7 @@ import Help from '@mui/icons-material/Help'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Transaction = {
   id: string,
@@ -20,6 +21,9 @@ type Transaction = {
   site: string
 }
 
+const currencyValueGetter = (params: GridValueGetterParams) =>
+  (params.value as number).toLocaleString(undefined, { minimumFractionDigits: 2 }) + ' ₽'
+
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', flex: 1 },
   {
@@ -27,35 +31,37 @@ const columns: GridColDef[] = [
     headerName: 'Полная сумма',
     flex: 2,
     editable: true,
+    valueGetter: currencyValueGetter
   },
   {
     field: 'addSum',
     headerName: 'Сумма пополнения',
     flex: 2,
     editable: true,
+    valueGetter: currencyValueGetter
   },
   {
     field: 'checkoutService',
     headerName: 'Касса',
-    flex: 3,
+    flex: 2,
     editable: true,
   },
   {
     field: 'operationType',
     headerName: 'Тип операции',
     description: 'Здесь будут описаны типы операций',
-    flex: 3,
-    valueGetter: (params: GridValueGetterParams) =>
-      ({
-        'operationType1': 'Тип 1',
-        'operationType2': 'Тип 2',
-        'operationType3': 'Тип 3',
-      }[params.row.operationType as string])
+    flex: 4,
+    // valueGetter: (params: GridValueGetterParams) =>
+    //   ({
+    //     'operationType1': 'Тип 1',
+    //     'operationType2': 'Тип 2',
+    //     'operationType3': 'Тип 3',
+    //   }[params.row.operationType as string])
   },
   {
     field: 'notificationStatus',
     headerName: 'Статус уведомления',
-    flex: 3,
+    flex: 3.1,
     renderCell: (params: GridRenderCellParams) => (
       <Chip 
         icon={{
@@ -77,13 +83,13 @@ const columns: GridColDef[] = [
   {
     field: 'source',
     headerName: 'Источник',
-    flex: 3,
+    flex: 6,
     renderCell: (params: GridRenderCellParams) => (
-      <Stack>
+      <Stack direction='row' gap={2} alignItems='center'>
         <Image src={params.row.source.picture} width={30} height={30} style={{ borderRadius: 99 }} alt='Аватарка источника' />
         <Stack>
           <Typography>{params.row.source.title}</Typography>
-          <Typography>{params.row.source.id}</Typography>
+          <Typography variant='caption'>ID: {params.row.source.id}</Typography>
         </Stack>
       </Stack>
     )
@@ -91,7 +97,12 @@ const columns: GridColDef[] = [
   {
     field: 'site',
     headerName: 'Сайт',
-    flex: 3
+    flex: 4,
+    renderCell: (params: GridRenderCellParams) => (
+      <Link href={params.row.site}>
+        {params.row.site}
+      </Link>
+    )
   },
 ]
 
@@ -127,7 +138,6 @@ export default function TransactionsTable() {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
         sx={{ height: 'inherit' }}
