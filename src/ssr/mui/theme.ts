@@ -1,6 +1,9 @@
 import { createTheme } from '@mui/material/styles'
 import { red } from '@mui/material/colors'
 
+import { ruRU } from '@mui/x-data-grid'
+import { ruRU as coreRuRU } from '@mui/material/locale'
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -13,6 +16,6 @@ const theme = createTheme({
       main: red.A400
     }
   }
-})
+}, ruRU, coreRuRU)
 
 export default theme

@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.module.scss'
-import { DataGrid, GridColDef, GridValueGetterParams, GridRenderCellParams, ruRU } from '@mui/x-data-grid'
+import { DataGrid, GridColDef, GridValueFormatterParams, GridRenderCellParams } from '@mui/x-data-grid'
 import Chip from '@mui/material/Chip'
 import CheckCircle from '@mui/icons-material/CheckCircle'
 import PendingCircle from '@mui/icons-material/Pending'
@@ -33,7 +33,9 @@ const columns: GridColDef[] = [
     type: 'datetime',
     headerName: 'Дата',
     flex: 2,
-    editable: true
+    editable: true,
+    valueFormatter: (params: GridValueFormatterParams) =>
+      new Intl.DateTimeFormat('ru-RU').format(params.value)
   },
   {
     field: 'sum',
@@ -151,7 +153,6 @@ export default function TransactionsTable() {
         loading={data === null}
         rows={data as Transaction[]}
         columns={columns}
-        localeText={ruRU}
         pageSize={10}
         rowsPerPageOptions={[10, 50]}
         disableSelectionOnClick

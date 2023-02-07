@@ -22,6 +22,8 @@ import {
   mdiMessageText,
   mdiHomeAnalytics
 } from '@mdi/js'
+import { useRouter } from 'next/router'
+import cx from 'classnames'
 
 export default function NavMenu() {
   const { t } = useTranslation('pages_titles')
@@ -32,112 +34,84 @@ export default function NavMenu() {
       role='presentation'
     >
       <List>
-        <ListItem disablePadding>
-          <Link href='/' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiHomeAnalytics} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('homepage')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
+        <NavMenuItem
+          link='/'
+          mdiIconPath={mdiHomeAnalytics}
+          text={t('homepage')}
+        />
         <Divider />
         <ListSubheader component='div'>
           {t('financial_statistics.subheader')}
         </ListSubheader>
-        <ListItem disablePadding>
-          <Link href='/statistics/transactions' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiCurrencyUsd} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('financial_statistics.transactions')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link href='/statistics/subscriptions' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiCreditCardRefreshOutline} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('financial_statistics.subscriptions')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          {/** TODO: replace "statistics" with smthg more general? */}
-          <Link href='/statistics/checkouts' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiApplicationCogOutline} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('financial_statistics.checks_settings')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link href='/payouts' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiCashClock} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('financial_statistics.payouts')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
+        <NavMenuItem
+          link='/statistics/transactions'
+          mdiIconPath={mdiCurrencyUsd}
+          text={t('financial_statistics.transactions')}
+        />
+        <NavMenuItem
+          link='/statistics/subscriptions'
+          mdiIconPath={mdiCreditCardRefreshOutline}
+          text={t('financial_statistics.subscriptions')}
+        />
+        <NavMenuItem
+          link='/statistics/checkouts' 
+          mdiIconPath={mdiApplicationCogOutline} 
+          text={t('financial_statistics.checks_settings')}
+        />
+        <NavMenuItem
+          link='/payouts'
+          mdiIconPath={mdiCashClock}
+          text={t('financial_statistics.payouts')}
+        />
       </List>
       <Divider />
       <List>
         <ListSubheader component='div'>
           {t('users.subheader')}
         </ListSubheader>
-        <ListItem disablePadding>
-          <Link href='/sources/owners' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiAccountNetwork} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('users.sources_owners')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link href='/sources/users' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiAccountMultiple} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('users.sources_users')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
+        <NavMenuItem
+          link='/sources/owners'
+          mdiIconPath={mdiAccountNetwork}
+          text={t('users.sources_owners')}
+        />
+        <NavMenuItem
+          link='/sources/users'
+          mdiIconPath={mdiAccountMultiple}
+          text={t('users.sources_users')}
+        />
       </List>
       <Divider />
       <List>
-        <ListItem disablePadding>
-          <Link href='/sources' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiRobot} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('sources.subheader')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-        <ListItem disablePadding>
-          <Link href='/ads' className={styles.link}>
-            <ListItemButton>
-              <ListItemIcon>
-                <MDIIcon path={mdiMessageText} size={1} />
-              </ListItemIcon>
-              <ListItemText primary={t('ads')} />
-            </ListItemButton>
-          </Link>
-        </ListItem>
+        <NavMenuItem
+          link='/sources'
+          mdiIconPath={mdiRobot}
+          text={t('sources.subheader')}
+        />
+        <NavMenuItem
+          link='/ads'
+          mdiIconPath={mdiMessageText}
+          text={t('ads')}
+        />
       </List>
       <Divider />
     </Box>
+  )
+}
+
+function NavMenuItem(props: { text: string, link: string, mdiIconPath: string }) {
+  const router = useRouter()
+  const isActive = router.asPath.split('?')[0] === props.link
+
+  return (
+    <ListItem disablePadding>
+      <Link href={props.link} className={cx(styles.link, { [styles.active]: isActive })}>
+        <ListItemButton>
+          <ListItemIcon>
+            <MDIIcon path={props.mdiIconPath} size={1} />
+          </ListItemIcon>
+          <ListItemText primary={props.text} />
+        </ListItemButton>
+      </Link>
+    </ListItem>
   )
 }
