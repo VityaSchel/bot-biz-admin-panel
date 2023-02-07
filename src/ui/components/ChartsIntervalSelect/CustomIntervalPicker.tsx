@@ -29,11 +29,11 @@ export default function CustomIntervalPicker(props: {
         setEnd(props.value[1])
       }
     }
-  }, [open])
+  }, [props.open])
 
   React.useEffect(() => {
-    if(!start) setError('Не указана начальная дата')
-    else if(!end) setError('Не указана конечная дата')
+    if(!start || isNaN(start.getTime())) setError('Не указана начальная дата')
+    else if(!end || isNaN(end.getTime())) setError('Не указана конечная дата')
     else if(start.getTime() > end.getTime()) setError('Начальная дата позднее конечной')
     else setError(false)
   }, [start, end])
