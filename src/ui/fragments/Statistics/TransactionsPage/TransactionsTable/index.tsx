@@ -22,7 +22,7 @@ type Transaction = {
   addSum: number,
   checkoutService: string,
   operationType: string,
-  notificationStatus: NotificationStatusID,
+  notificationStatus: NotificationStatus['id'],
   source: { id: string, title: string, picture: string }
   site: string
 }
@@ -47,8 +47,7 @@ const checkoutServiceRenderCell = (params: GridRenderCellParams) => {
   )
 }
 
-type NotificationStatusID = 'RECEIVED' | 'SENT' | 'FAILURE' | 'UNKNOWN'
-type NotificationStatus = { id: NotificationStatusID, label: string, icon: React.ReactNode }
+type NotificationStatus = { id: 'RECEIVED' | 'SENT' | 'FAILURE' | 'UNKNOWN', label: string, icon: React.ReactNode }
 const notificationStatuses = [
   { id: 'RECEIVED', label: 'Получено', icon: <CheckCircle /> },
   { id: 'SENT', label: 'Отправлено', icon: <PendingCircle /> },
@@ -127,7 +126,7 @@ const columns: GridColDef[] = [
     flex: 3.4,
     editable: true,
     renderCell: (params: GridRenderCellParams) => {
-      const status = notificationStatuses.find(s => s.id === params.row.notificationStatus)
+      const status = notificationStatuses.find(s => s.id === params.row.notificationStatus) as NotificationStatus
       return (
         <Chip 
           icon={status.icon}
