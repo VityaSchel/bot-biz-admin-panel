@@ -21,7 +21,7 @@ build:
   script:
     - >
       docker build
-      --file docker/node/Dockerfile
+      --file devops/images/node/Dockerfile
       --build-arg BUILDKIT_INLINE_CACHE=1
       --cache-from $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-dev
       --build-context project=.
@@ -31,7 +31,7 @@ build:
 
     - >
       docker build
-      --file docker/node/Dockerfile
+      --file devops/images/node/Dockerfile
       --build-arg BUILDKIT_INLINE_CACHE=1
       --cache-from $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-prod
       --build-context project=.
