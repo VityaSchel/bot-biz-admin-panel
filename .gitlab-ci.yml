@@ -62,7 +62,7 @@ deploy-staging-k8s:
     - chmod 700 ~/.kube/
     - kubectl create ns ${NAMESPACE} || true
     - kubectl create secret docker-registry dockercfg --docker-server=$DOCKER_REGISTRY --docker-username=$DOCKER_REGISTRY_USER --docker-password=$DOCKER_REGISTRY_PASS -n ${NAMESPACE} || true
-    - envsubst < devops/k8s/frontend_pannel.yaml | kubectl apply -f -
+    - for yaml in devops/k8s/*.yaml; do echo $yaml && envsubst < $yaml | kubectl apply -f -; done
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
     - if: '$CI_COMMIT_BRANCH == "hloth"'
