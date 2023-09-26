@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admin-frontend-panel
+  labels:
+    app: admin-frontend-panel
+  namespace: ${NAMESPACE}
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: admin-frontend-panel
+  template:
+    metadata:
+      labels:
+        app: admin-frontend-panel
+    spec:
+      containers:
+        - name: admin-frontend-panel
+          image: $DOCKER_REGISTRY/bot.biz/admin-frontend_panel:${IMAGE_TAG}
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 1Gi
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: dockercfg
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-frontend-panel
+  namespace: ${NAMESPACE}
+
+spec:
+  selector:
+    app: admin-frontend-panel
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
