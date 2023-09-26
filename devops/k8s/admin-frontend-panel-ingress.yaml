@@ -10,7 +10,7 @@ spec:
   routes:
     - match: Host(`admin.x5.money`) && PathPrefix(`/`)
       kind: Rule
-      priority: 10
+      priority: 99
       middlewares:
         - name: client-auth-middleware
           namespace: ${NAMESPACE}
