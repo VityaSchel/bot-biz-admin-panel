@@ -1,0 +1,11 @@
+.list {
+  width: 300px;
+
+  .link {
+    width: 100%;
+
+    &.active {
+      background-color: #eee;
+    }
+  }
+}

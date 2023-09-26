@@ -1,0 +1,69 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DOCKER_VERSION: 24.0.6
+  DOCKER_REGISTRY_IMAGE: $DOCKER_REGISTRY/bot.biz/admin-frontend_panel
+
+image: docker:${DOCKER_VERSION}
+
+.docker_init_template:
+  - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASS $DOCKER_REGISTRY
+
+build:
+  stage: build
+  services:
+    - name: docker:${DOCKER_VERSION}-dind
+      command: [ "--registry-mirror", "https://registry-proxy.x5.money" ]
+  before_script:
+    - !reference [ .docker_init_template ]
+  script:
+    - >
+      docker build
+      --file devops/images/node/Dockerfile
+      --build-arg BUILDKIT_INLINE_CACHE=1
+      --cache-from $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-dev
+      --build-context project=.
+      --target dev
+      --tag $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-dev
+      .
+
+    - >
+      docker build
+      --file devops/images/node/Dockerfile
+      --build-arg BUILDKIT_INLINE_CACHE=1
+      --cache-from $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-prod
+      --build-context project=.
+      --target prod
+      --tag $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-prod
+      .
+
+    - docker push $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-dev
+    - docker push $DOCKER_REGISTRY_IMAGE:$CI_COMMIT_SHA-prod
+
+deploy-staging-k8s:
+  image:
+    name: alpine:latest
+  stage: deploy
+  variables:
+    NAMESPACE: botbiz
+    IMAGE_TAG: $CI_COMMIT_SHA-prod
+  script:
+    - set -x
+    - apk add curl
+    - apk add gettext
+    - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    - chmod +x kubectl
+    - cp kubectl /usr/local/bin/kubectl
+    - mkdir -p ~/.kube
+    - echo "$STG_KUBECONFIG" > ~/.kube/config
+    - chmod 600 ~/.kube/config
+    - chmod 700 ~/.kube/
+    - kubectl create ns ${NAMESPACE} || true
+    - kubectl create secret docker-registry dockercfg --docker-server=$DOCKER_REGISTRY --docker-username=$DOCKER_REGISTRY_USER --docker-password=$DOCKER_REGISTRY_PASS -n ${NAMESPACE} || true
+    - for yaml in devops/k8s/*.yaml; do echo $yaml && envsubst < $yaml | kubectl apply -f -; done
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - if: '$CI_COMMIT_BRANCH == "hloth"'
+

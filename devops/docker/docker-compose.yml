@@ -1,0 +1,32 @@
+name: botbiz-frontend-panel-dev
+
+services:
+
+  node:
+    build:
+      context: ../images/node
+      target: dev
+    container_name: ${COMPOSE_PROJECT_NAME}-node
+    hostname: ${COMPOSE_PROJECT_NAME}-node
+    restart: "no"
+    user: node
+    ports:
+      - "3000:3000"
+    networks:
+      traefik: {}
+    volumes:
+      - ./..:/data
+    command: "tail -f /dev/null"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik"
+
+      - "traefik.http.services.${COMPOSE_PROJECT_NAME}-client-api.loadbalancer.server.port=3000"
+
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-client-api.rule=Host(`${CLIENT_DOMAIN}`)"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-client-api.tls=true"
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-client-api.service=${COMPOSE_PROJECT_NAME}-client-api"
+
+networks:
+  traefik:
+    external: true
