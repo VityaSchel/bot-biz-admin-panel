@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: admin-frontend-panel
+  namespace: ${NAMESPACE}
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`admin.x5.money`) && PathPrefix(`/`)
+      kind: Rule
+      priority: 10
+      middlewares:
+        - name: client-auth-middleware
+          namespace: ${NAMESPACE}
+      services:
+      - name: admin-frontend-panel
+        port: 3000
