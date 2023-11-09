@@ -12,7 +12,7 @@ export function Page({ title, description, children }: React.PropsWithChildren<{
         <meta name="description" content={description} />
       </Head>
       <div className="space-y-6 flex-1">
-        <div className='space-y-2'>
+        <div className='mt-6 space-y-2'>
           <h3 className="text-lg font-medium">{title}</h3>
           <p className="text-sm text-muted-foreground">
             {description}

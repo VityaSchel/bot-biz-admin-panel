@@ -20,19 +20,6 @@ ChartJS.register(
   Legend
 )
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Chart.js Bar Chart',
-    },
-  },
-}
-
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
 
 export const data = {
@@ -52,5 +39,16 @@ export const data = {
 }
 
 export function Chart() {
-  return <Bar options={options} data={data} />
+  return <Bar options={{
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart',
+      },
+    },
+  }} data={data} />
 }
