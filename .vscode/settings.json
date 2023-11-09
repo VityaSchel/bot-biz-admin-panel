@@ -1,6 +1,13 @@
 {
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.tabCompletion": "on",
+  "files.associations": {"tailwind.css":"tailwindcss"},
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "path-intellisense.mappings": {
     "/*": "${workspaceFolder}/*"
   },
