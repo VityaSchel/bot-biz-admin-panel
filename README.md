@@ -1,29 +1,17 @@
-# Фронтенд админки x5.io
+# Admin panel for bot.biz
 
-Демо: [https://x5io-admin-panel-demo.netlify.app/](https://x5io-admin-panel-demo.netlify.app/)
+Admin panel built for Freelance client with Next.js, React, Chart.js
 
-## Подготовка
+## New version (@shadcn/ui)
 
-1. Клонируйте репозиторий
-2. Для запуска потребуется Node.js и npm
-3. Установите зависимости
-```
-npm i
-```
+[Visit interactive demo](https://x5io-admin-panel.netlify.app/)
 
-## Запуск
-
-```
-PORT=1234 NEXT_PUBLIC_PORT=1234 npm run dev
-```
-
-Запустится локальный сервер на Next.js
-
-Переменные `PORT` и `NEXT_PUBLIC_PORT` должны быть одинаковыми. `PORT` используется фреймворком Next.js для запуска сервера, а `NEXT_PUBLIC_PORT` для клиента Apollo (API).
+![Screenshot new](screenshots/screenshot-new.png)
 
 
-## Сборка
+## Old version (Material UI)
 
-```
-npm run build && npm run start
-```
+[Visit interactive demo](https://main--x5io-admin-panel.netlify.app/)
+
+![Screenshot old](screenshots/screenshot-old-1.png)
+![Screenshot old](screenshots/screenshot-old-2.png)
