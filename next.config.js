@@ -1,4 +1,4 @@
-const million = require('million/compiler');
+// const million = require('million/compiler');
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { i18n } = require('./next-i18next.config')
 
@@ -21,6 +21,8 @@ const nextConfig = {
   }
 }
 
-module.exports = million.next(
-  nextConfig, { auto: true }
-)
+// module.exports = million.next(
+//   nextConfig, { auto: true }
+// )
+
+module.exports = nextConfig

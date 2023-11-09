@@ -30,6 +30,7 @@
     "million": "^2.6.4",
     "next": "14.0.1",
     "next-i18next": "^13.0.3",
+    "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.7.1",

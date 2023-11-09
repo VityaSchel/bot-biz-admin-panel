@@ -2,6 +2,7 @@ import '@/shared/styles/tailwind.css'
 import type { AppProps } from 'next/app'
 import { Inter as FontSans } from 'next/font/google'
 import cx from 'classnames'
+import { ThemeProvider } from '@/app/theme-provider'
 
 export const fontSans = FontSans({
   subsets: ['latin', 'cyrillic'],
@@ -10,6 +11,13 @@ export const fontSans = FontSans({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Component {...pageProps} className={cx('min-h-screen', fontSans.variable)} />
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <Component {...pageProps} className={cx('min-h-screen', fontSans.variable)} />
+    </ThemeProvider>
   )
 }

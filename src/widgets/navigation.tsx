@@ -7,7 +7,6 @@ import {
   mdiAccountMultiple,
   mdiRobot,
   mdiCashClock,
-  mdiCashSync,
   mdiMessageText,
   mdiHomeAnalytics
 } from '@mdi/js'
@@ -22,7 +21,7 @@ export function Navigation() {
         { href: '/finances/transactions', title: 'Транзакции', icon: <MDIIcon size={1} path={mdiCurrencyUsd} /> },
         { href: '/finances/subscriptions', title: 'Подписки', icon: <MDIIcon size={1} path={mdiCreditCardRefreshOutline} /> },
         { href: '/finances/checkouts', title: 'Настройка касс', icon: <MDIIcon size={1} path={mdiApplicationCogOutline} /> },
-        { href: '/finances/payouts', title: 'Выплаты', icon: <MDIIcon size={1} path={mdiCashSync} /> },
+        { href: '/finances/payouts', title: 'Выплаты', icon: <MDIIcon size={1} path={mdiCashClock} /> },
         { group: true, title: 'Пользователи' },
         { href: '/users/sources-owners', title: 'Владельцы источников', icon: <MDIIcon size={1} path={mdiAccountNetwork} /> },
         { href: '/users/sources-users', title: 'Пользователи источников', icon: <MDIIcon size={1} path={mdiAccountMultiple} /> },
