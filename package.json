@@ -2,6 +2,7 @@
   "name": "admin-panel",
   "version": "0.1.0",
   "private": true,
+  "author": "Viktor Shchelochkov <hi@hloth.dev> (https://hloth.dev)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,7 +13,6 @@
     "@apollo/client": "^3.7.4",
     "@mdi/js": "^7.1.96",
     "@mdi/react": "^1.6.1",
-    "@next/font": "13.1.2",
     "@svgr/webpack": "^6.5.1",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
@@ -24,6 +24,7 @@
     "graphql": "^16.6.0",
     "hamburger-react": "^2.5.0",
     "lucide-react": "^0.292.0",
+    "million": "^2.6.4",
     "next": "14.0.1",
     "next-i18next": "^13.0.3",
     "react": "^18",
