@@ -29,6 +29,7 @@ export function Navigation() {
         { href: '/sources', title: 'Источники', icon: <MDIIcon size={1} path={mdiRobot} /> },
         { href: '/distributions', title: 'Рассылки', icon: <MDIIcon size={1} path={mdiMessageText} /> },
       ]}
+      className='sticky top-[121px] h-fit'
     />
   )
 }

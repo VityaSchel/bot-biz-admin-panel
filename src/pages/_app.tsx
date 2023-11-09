@@ -1,4 +1,5 @@
 import '@/shared/styles/tailwind.css'
+import '@/shared/styles/globals.scss'
 import type { AppProps } from 'next/app'
 import { Inter as FontSans } from 'next/font/google'
 import cx from 'classnames'
